@@ -11,10 +11,13 @@ import {
   getTodosTC,
   updateTodoTC,
 } from "../BLL/reducers/TodolistSlice";
+import { Header } from "../components/Header/Header";
+import Sidebar from "../components/Sidebar/Sidebar";
 
 function App() {
-  const todos = useAppSelector((state) => state.todos.todos);
-  console.log(todos);
+  const todos = useAppSelector((state) => state.todoData.todos);
+  const state = useAppSelector((state) => state);
+  console.log(state);
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(getTodosTC());
@@ -22,24 +25,8 @@ function App() {
 
   return (
     <div className="App">
-      {todos.map((t) => {
-        return (
-          <div key={t.id}>
-            <div>{t.title}</div>
-
-            <button onClick={() => dispatch(deleteTodoTC(t.id))}>Delete</button>
-            <button
-              onClick={() =>
-                dispatch(updateTodoTC({ todolistId: t.id, title: "piska" }))
-              }
-            >
-              Update
-            </button>
-          </div>
-        );
-      })}
-      <div>hi</div>
-      <button onClick={() => dispatch(addTodoTC("new Todo"))}>add todo</button>
+      {/*<Header />*/}
+      <Sidebar />
       <Routes>
         <Route path={"/"} element={<MainAsync />} />
         <Route path={"/todolist"} element={<TodolistAsync />} />
