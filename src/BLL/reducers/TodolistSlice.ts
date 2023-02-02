@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { todoListsApi } from "../../API/todoListsApi";
 import { logDOM } from "@testing-library/react";
-import { addTodosByTasks } from "./TasksSlice";
+import { addTodosByTasks, deleteTasksByTodo } from "./TasksSlice";
 
 export type TodolistState = {
   id: string;
@@ -47,6 +47,7 @@ export const deleteTodoTC = createAsyncThunk(
     try {
       if (!response.data.resultCode) {
         dispatch(deleteTodo(todolistId));
+        deleteTasksByTodo(todolistId);
       }
     } catch (e: any) {}
   }

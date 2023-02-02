@@ -1,36 +1,35 @@
 import React, { useEffect } from "react";
-import logo from "./logo.svg";
 import "../styles/index.scss";
-import { Route, Routes } from "react-router-dom";
-import { MainAsync } from "../pages/Main/Main.async";
-import { TodolistAsync } from "../pages/Todolist/Todolist.async";
+import { Route, Routes, Navigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../hooks/hooks";
-import {
-  addTodoTC,
-  deleteTodoTC,
-  getTodosTC,
-  updateTodoTC,
-} from "../BLL/reducers/TodolistSlice";
-import { Header } from "../components/Header/Header";
-import Sidebar from "../components/Sidebar/Sidebar";
+import { getTodosTC } from "../BLL/reducers/TodolistSlice";
+import { meTC } from "../BLL/reducers/AuthReducerSlice";
+import { Header } from "../pages/Header/Header";
+import Main from "../pages/Main/Main";
+import Sidebar from "../pages/Sidebar/Sidebar";
+import Login from "../pages/Login/Login";
 
 function App() {
-  const todos = useAppSelector((state) => state.todoData.todos);
-  const state = useAppSelector((state) => state);
-  console.log(state);
   const dispatch = useAppDispatch();
+  const todos = useAppSelector((state) => state.todoData.todos);
+  const tasks = useAppSelector((state) => state.tasksData.tasks);
+  const isLoggedIn = useAppSelector((state) => state.authData.isLoggedIn);
+
   useEffect(() => {
-    dispatch(getTodosTC());
+    dispatch(meTC());
   }, []);
 
+  if (!isLoggedIn) {
+    return <Login />;
+  }
+
   return (
-    <div className="App">
-      {/*<Header />*/}
+    <div className={`app dark`}>
+      <Header />
       <Sidebar />
       <Routes>
-        <Route path={"/"} element={<MainAsync />} />
-        <Route path={"/todolist"} element={<TodolistAsync />} />
-        <Route path={"/todolist/:id"} element={<TodolistAsync />} />
+        <Route path={"/"} element={<Main />} />
+        <Route path={"/login"} element={<Login />} />
       </Routes>
     </div>
   );
