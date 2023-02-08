@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { authApi } from "../../API/auth-api";
-import { setAppInitialization } from "./AppSlice";
+import { authApi } from "../../api/auth-api";
+import { setAppInitialization, setAppStatus } from "./AppSlice";
+import { FieldValues } from "react-hook-form";
 
 type InitialStateType = {
   isLoggedIn: boolean;
@@ -10,7 +11,7 @@ export const meTC = createAsyncThunk("@@authME", async (_, { dispatch }) => {
   const response = await authApi.getMe();
   try {
     if (!response.data.resultCode) {
-      dispatch(authMe(true));
+      dispatch(isLoggedIn(true));
     }
   } catch (e: any) {
   } finally {
@@ -18,17 +19,46 @@ export const meTC = createAsyncThunk("@@authME", async (_, { dispatch }) => {
   }
 });
 
+export const logoutTC = createAsyncThunk("logout", async (_, { dispatch }) => {
+  try {
+    dispatch(setAppStatus("loading"));
+    const res = await authApi.logout();
+    if (!res.resultCode) {
+      dispatch(isLoggedIn(false));
+      dispatch(setAppStatus("success"));
+    }
+  } catch (e: any) {
+    dispatch(setAppStatus("failed"));
+  }
+});
+
+export const loginTC = createAsyncThunk(
+  "login",
+  async (data: FieldValues, { dispatch }) => {
+    dispatch(setAppStatus("loading"));
+    try {
+      const res = await authApi.login(data);
+      if (!res.resultCode) {
+        dispatch(isLoggedIn(true));
+        dispatch(setAppStatus("success"));
+      }
+    } catch (e: any) {
+      dispatch(setAppStatus("failed"));
+    }
+  }
+);
+
 export const authReducerSlice = createSlice({
   name: "auth",
   initialState: {
     isLoggedIn: false,
   } as InitialStateType,
   reducers: {
-    authMe: (state, action: PayloadAction<boolean>) => {
+    isLoggedIn: (state, action: PayloadAction<boolean>) => {
       state.isLoggedIn = action.payload;
     },
   },
 });
 
 export default authReducerSlice.reducer;
-export const { authMe } = authReducerSlice.actions;
+export const { isLoggedIn } = authReducerSlice.actions;

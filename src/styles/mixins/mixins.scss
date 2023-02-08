@@ -1,0 +1,72 @@
+@mixin button {
+  &:hover {
+    transform: translateY(1px);
+  }
+
+  &:active {
+    transform: translateY(-1px);
+  }
+
+  &:disabled {
+    transform: none;
+    opacity: .5;
+  }
+  cursor: pointer;
+}
+
+@mixin flexCenter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin input {
+  .labelInput {
+    position: relative;
+
+    font-size: 13px;
+    font-weight: 400;
+
+    .input {
+      width: 347px;
+      height: 45px;
+      padding: 5px;
+
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 24px;
+      color: #000;
+
+      background: #fff;
+      border: none;
+      border-bottom: 1px solid gray;
+
+      &:hover {
+        border-bottom: 1px solid gray;
+        outline: none;
+      }
+
+      &:focus {
+        border-bottom: 1px solid gray;
+        outline: none;
+      }
+    }
+
+    .errorInput {
+      border-color: #cc1439;
+    }
+
+    .iconShowPassword {
+      cursor: pointer;
+
+      position: absolute;
+      top: 50%;
+      right: 2%;
+      transform: translateY(-50%);
+    }
+
+    .errorText {
+      color: #ff244b;
+    }
+  }
+}

@@ -1,0 +1,14 @@
+@import './src/styles/mixins/mixins';
+.btn {
+  padding: 8px 28px;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  color: #FFFFFF;
+  background: #635FC7;
+
+  border: none;
+  border-radius: 24px;
+
+  @include button;
+}

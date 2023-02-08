@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { tasksApi, UpdateModelType } from "../../API/tasksApi";
+import { tasksApi, UpdateModelType } from "../../api/tasksApi";
 import { ModelType } from "./TodolistSlice";
+import { setAppStatus } from "./AppSlice";
 
 export type TaskType = {
   description: string;
@@ -48,48 +49,63 @@ type UpdateType = {
 export const getTasksTC = createAsyncThunk(
   "@@get-tasks",
   async (todolistId: string, { dispatch }) => {
-    const response = await tasksApi.getTasks(todolistId);
+    dispatch(setAppStatus("loading"));
     try {
+      const response = await tasksApi.getTasks(todolistId);
       const model = {
         tasks: response.data.items,
         todolistId,
       };
       dispatch(getTasks(model));
-    } catch (e: any) {}
+      dispatch(setAppStatus("success"));
+    } catch (e: any) {
+      dispatch(setAppStatus("failed"));
+    }
   }
 );
 
 export const addTaskTC = createAsyncThunk(
   "@@add-task",
   async ({ todolistId, title }: ModelType, { dispatch }) => {
-    const response = await tasksApi.createTask(todolistId, title);
+    dispatch(setAppStatus("loading"));
     try {
+      const response = await tasksApi.createTask(todolistId, title);
       if (!response.data.resultCode) {
         dispatch(addTask({ todolistId, task: response.data.data.item }));
+        dispatch(setAppStatus("success"));
       }
-    } catch (e: any) {}
+    } catch (e: any) {
+      dispatch(setAppStatus("failed"));
+    }
   }
 );
 
 export const deleteTaskTC = createAsyncThunk(
   "@@delete-task",
   async ({ todolistId, taskId }: DeleteTask, { dispatch }) => {
-    const response = await tasksApi.deleteTask(todolistId, taskId);
-
+    dispatch(setAppStatus("loading"));
     try {
+      const response = await tasksApi.deleteTask(todolistId, taskId);
       if (!response.data.resultCode) {
         dispatch(deleteTask({ todolistId, taskId }));
+        dispatch(setAppStatus("success"));
       }
-    } catch (e: any) {}
+    } catch (e: any) {
+      dispatch(setAppStatus("failed"));
+    }
   }
 );
 
 export const updateTaskTC = createAsyncThunk(
   "@@update-Task",
   async ({ todolistId, taskId, updateModel }: UpdateType, { dispatch }) => {
-    const response = await tasksApi.updateTask(todolistId, taskId, updateModel);
-
+    dispatch(setAppStatus("loading"));
     try {
+      const response = await tasksApi.updateTask(
+        todolistId,
+        taskId,
+        updateModel
+      );
       if (!response.data.resultCode) {
         dispatch(
           updateTask({
@@ -98,8 +114,11 @@ export const updateTaskTC = createAsyncThunk(
             updateModel: response.data.data.item,
           })
         );
+        dispatch(setAppStatus("success"));
       }
-    } catch (e: any) {}
+    } catch (e: any) {
+      dispatch(setAppStatus("failed"));
+    }
   }
 );
 

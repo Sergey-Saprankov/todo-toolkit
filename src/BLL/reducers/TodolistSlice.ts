@@ -1,7 +1,8 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { todoListsApi } from "../../API/todoListsApi";
+import { todoListsApi } from "../../api/todoListsApi";
 import { logDOM } from "@testing-library/react";
 import { addTodosByTasks, deleteTasksByTodo } from "./TasksSlice";
+import { setAppStatus } from "./AppSlice";
 
 export type TodolistState = {
   id: string;
@@ -22,34 +23,48 @@ type InitialStateType = {
 export const getTodosTC = createAsyncThunk(
   "@@todos/get-todo",
   async (_, { dispatch }) => {
-    const response = await todoListsApi.getTodos();
+    dispatch(setAppStatus("loading"));
     try {
+      const response = await todoListsApi.getTodos();
       dispatch(getTodos(response.data));
-    } catch (e: any) {}
+      dispatch(setAppStatus("success"));
+    } catch (e: any) {
+      dispatch(setAppStatus("failed"));
+    }
   }
 );
 
 export const addTodoTC = createAsyncThunk(
   "@@add-todo",
   async (title: string, { dispatch }) => {
-    const response = await todoListsApi.createTodo(title);
+    dispatch(setAppStatus("loading"));
     try {
+      const response = await todoListsApi.createTodo(title);
+
       dispatch(addTodo(response.data.data.item));
       dispatch(addTodosByTasks(response.data.data.item.id));
-    } catch (e: any) {}
+      dispatch(setAppStatus("success"));
+    } catch (e: any) {
+      dispatch(setAppStatus("failed"));
+    }
   }
 );
 
 export const deleteTodoTC = createAsyncThunk(
   "@@delete-todo",
   async (todolistId: string, { dispatch }) => {
-    const response = await todoListsApi.deleteTodo(todolistId);
+    dispatch(setAppStatus("loading"));
+
     try {
+      const response = await todoListsApi.deleteTodo(todolistId);
       if (!response.data.resultCode) {
         dispatch(deleteTodo(todolistId));
         deleteTasksByTodo(todolistId);
+        dispatch(setAppStatus("success"));
       }
-    } catch (e: any) {}
+    } catch (e: any) {
+      dispatch(setAppStatus("failed"));
+    }
   }
 );
 
@@ -57,12 +72,17 @@ export const updateTodoTC = createAsyncThunk(
   "@@update-todo",
   async (model: ModelType, { dispatch }) => {
     const { todolistId, title } = model;
-    const response = await todoListsApi.updateTodo(todolistId, title);
+
+    dispatch(setAppStatus("loading"));
     try {
+      const response = await todoListsApi.updateTodo(todolistId, title);
       if (!response.data.resultCode) {
         dispatch(updateTodo(model));
+        dispatch(setAppStatus("success"));
       }
-    } catch (e: any) {}
+    } catch (e: any) {
+      dispatch(setAppStatus("failed"));
+    }
   }
 );
 
