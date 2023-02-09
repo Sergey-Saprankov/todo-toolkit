@@ -20,5 +20,11 @@ export const Todolist = () => {
 
     const currentTodo = todos.find(t => t.id === id)
     
-    return <div style={{color: "#fff"}}>{currentTodo?.title}</div>
+    return (
+        <div className={s.container}>
+            <div className={s.wrapper}>
+                {currentTodo?.title}
+            </div>
+        </div>
+        )
 }

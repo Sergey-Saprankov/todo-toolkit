@@ -1,0 +1,11 @@
+.container {
+    width: 100vw;
+    min-height: 100%;
+    display: flex;
+    justify-content: flex-end;
+
+    .wrapper {
+        width: 78vw;
+        min-height: 100%;
+    }
+}
