@@ -1,7 +1,7 @@
 import React from "react";
 import s from "./Header.module.scss";
 import { useAppDispatch, useAppSelector } from "../../../common/hooks/hooks";
-import Logo from "../../../common/components/Logo/Logo";
+import {Logo} from "../../../common/components/Logo/Logo";
 import logo from "../../../assets/logo.svg";
 import { Button } from "../../../common/components/Button/Button";
 import { logoutTC } from "../../../BLL/reducers/AuthReducerSlice";

@@ -1,4 +1,5 @@
 export const PATH = {
   login: "/login",
-  main: "/main",
+  todos: "/todo",
+  todolist: '/todo/:id'
 };

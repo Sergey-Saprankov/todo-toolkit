@@ -1,0 +1,20 @@
+.container {
+    width: 22vw;
+    min-height: calc(100vh);
+    position: fixed;
+    left: 0;
+    top: 0;
+    opacity: .7;
+    background-color: #2B2C37;
+    border-right: 1px solid #3E3F4E;
+
+    .innerWrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        .logoContainer {
+            padding: 10px 0 5px 5vw;
+        }
+    }
+  }

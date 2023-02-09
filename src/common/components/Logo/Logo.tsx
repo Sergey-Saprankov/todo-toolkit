@@ -6,7 +6,7 @@ type LogoType = {
   img: string
 }
 
-const Logo: FC<LogoType> = ({ img }) => {
+export const Logo: FC<LogoType> = ({ img }) => {
   return (
     <div className={s.logoContainer}>
       <a
@@ -21,4 +21,4 @@ const Logo: FC<LogoType> = ({ img }) => {
   )
 }
 
-export default Logo
+

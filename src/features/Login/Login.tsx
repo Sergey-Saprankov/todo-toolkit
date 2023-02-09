@@ -21,7 +21,7 @@ export const Login = () => {
   };
 
   if (isLoggedIn) {
-    return <Navigate to={PATH.main} />;
+    return <Navigate to={PATH.todos} />;
   }
 
   return (
