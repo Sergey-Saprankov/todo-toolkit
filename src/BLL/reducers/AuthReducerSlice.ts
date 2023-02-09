@@ -41,6 +41,8 @@ export const loginTC = createAsyncThunk(
       if (!res.resultCode) {
         dispatch(isLoggedIn(true));
         dispatch(setAppStatus("success"));
+      } else {
+        dispatch(setAppStatus("failed"));
       }
     } catch (e: any) {
       dispatch(setAppStatus("failed"));

@@ -16,7 +16,7 @@ export const Header = React.memo(() => {
   const loginHandler = () => {
     return <Navigate to={PATH.login} />;
   };
-  console.log(disabled);
+  
   const logoutHandler = () => {
     dispatch(logoutTC());
   };

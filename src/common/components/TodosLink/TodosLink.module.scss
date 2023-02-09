@@ -1,6 +1,58 @@
 .container {
+    flex-grow: 2;
     width: 100%;
-    
+    display: flex;
+    flex-direction: column;
 
-    
+    .boardCount {
+        padding-left: 32px;
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 10px;
+    }
+
+    .addBoardTitle {
+        padding-left: 32px;
+        font-weight: 700;
+        font-size: 15px;
+        line-height: 19px;
+        color: #635FC7;
+    }
+
+    .item {
+        display: flex;
+        gap: 16px;
+        padding-left: 32px;
+        list-style-type: none;
+        width: 276px;
+        height: 48px;
+        border-radius: 0px 100px 100px 0px;
+        cursor: pointer;
+
+        .boardTitle {
+            align-self: center;
+            font-weight: 700;
+            font-size: 15px;
+            line-height: 19px;
+            color: #FFFFFF;
+        }
+
+        .boardIconContainer {
+            align-self: center;
+            max-height: 16px;
+            height: max-content;
+
+            .boardIcon {
+                max-width: 16px;
+                max-height: 16px;
+            }
+        }
+    }
+
+    .active {
+        background-color: #635FC7;
+        width: 276px;
+        border-radius: 0px 100px 100px 0px;
+        cursor: pointer;
+    }
 }

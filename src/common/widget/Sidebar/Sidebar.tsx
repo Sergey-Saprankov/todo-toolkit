@@ -12,6 +12,9 @@ export const Sidebar = () => {
           <Logo img={logo} />
         </div>
         <TodosLink />
+        <div>
+          hide
+        </div>
       </div>
     </div>
   );

@@ -1,7 +1,7 @@
 import { useAppSelector } from "../../hooks/hooks";
 import s from "./TodosLink.module.scss";
 import { NavLink } from "react-router-dom";
-import board from '../../../assets/board.svg'
+import board from "../../../assets/board.svg";
 
 export const TodosLink = () => {
   const todos = useAppSelector((state) => state.todoData.todos);
@@ -22,5 +22,11 @@ export const TodosLink = () => {
       </NavLink>
     );
   });
-  return <div className={s.container}>{todosLink}</div>;
+  return (
+    <div className={s.container}>
+      <div className={s.boardCount}>all Todolist ({todos.length})</div>
+      {todosLink}
+      <div className={s.addBoardTitle}>+ Create New To-do List</div>
+    </div>
+  );
 };
