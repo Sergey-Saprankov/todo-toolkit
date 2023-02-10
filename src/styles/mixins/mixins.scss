@@ -28,18 +28,22 @@
     font-weight: 400;
 
     .input {
-      width: 347px;
-      height: 45px;
+      width: max-content;
+      height: 30px;
       padding: 5px;
 
       font-size: 16px;
       font-weight: 500;
       line-height: 24px;
-      color: #000;
+      color: #fff;
+      background-color: #000112;
 
-      background: #fff;
+      & {
+        outline: none;
+      }
+
       border: none;
-      border-bottom: 1px solid gray;
+      border-bottom: 1px solid rgba(128, 128, 128, 0.16);
 
       &:hover {
         border-bottom: 1px solid gray;
@@ -48,6 +52,7 @@
 
       &:focus {
         border-bottom: 1px solid gray;
+        color: #fff;
         outline: none;
       }
     }

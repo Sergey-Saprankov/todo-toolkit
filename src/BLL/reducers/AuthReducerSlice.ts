@@ -26,6 +26,8 @@ export const logoutTC = createAsyncThunk("logout", async (_, { dispatch }) => {
     if (!res.resultCode) {
       dispatch(isLoggedIn(false));
       dispatch(setAppStatus("success"));
+    } else {
+      dispatch(setAppStatus("failed"));
     }
   } catch (e: any) {
     dispatch(setAppStatus("failed"));

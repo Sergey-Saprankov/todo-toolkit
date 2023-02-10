@@ -73,6 +73,8 @@ export const addTaskTC = createAsyncThunk(
       if (!response.data.resultCode) {
         dispatch(addTask({ todolistId, task: response.data.data.item }));
         dispatch(setAppStatus("success"));
+      } else {
+        dispatch(setAppStatus("failed"));
       }
     } catch (e: any) {
       dispatch(setAppStatus("failed"));
@@ -89,6 +91,8 @@ export const deleteTaskTC = createAsyncThunk(
       if (!response.data.resultCode) {
         dispatch(deleteTask({ todolistId, taskId }));
         dispatch(setAppStatus("success"));
+      } else {
+        dispatch(setAppStatus("failed"));
       }
     } catch (e: any) {
       dispatch(setAppStatus("failed"));
@@ -115,6 +119,8 @@ export const updateTaskTC = createAsyncThunk(
           })
         );
         dispatch(setAppStatus("success"));
+      } else {
+        dispatch(setAppStatus("failed"));
       }
     } catch (e: any) {
       dispatch(setAppStatus("failed"));

@@ -1,0 +1,75 @@
+@import './src/styles/mixins/mixins';
+
+.userNameContainer {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+
+  margin-bottom: 14px;
+
+  .userName {
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 24px;
+    color: inherit;
+  }
+
+  .iconPen {
+    cursor: pointer;
+
+    align-self: center;
+
+    width: 16px;
+    height: 16px;
+
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+      transform: translateY(-1px);
+    }
+
+    &:active {
+      transform: translateY(1px);
+    }
+  }
+}
+
+.inputWrapper {
+  .form {
+    @include input;
+
+    position: relative;
+
+    display: flex;
+    align-items: center;
+
+    margin-bottom: 14px;
+
+    .errorName {
+      color: #b31232;
+    }
+
+    .confirmName {
+      @include flexCenter;
+
+      cursor: pointer;
+      transform: translateX(-30px);
+      width: 24px;
+      height: 24px;
+
+      background-color: #000112;
+      border-radius: 50%;
+      border: 1px solid;
+      transition: all 0.2s ease-in-out;
+
+      &:disabled {
+        opacity: 0.1;
+      }
+
+      .updateIcon {
+        width: 24px;
+        height: 24px;
+      }
+    }
+  }
+}

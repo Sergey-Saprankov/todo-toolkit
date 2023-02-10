@@ -3,6 +3,7 @@ import { todoListsApi } from "../../api/todoListsApi";
 import { logDOM } from "@testing-library/react";
 import { addTodosByTasks, deleteTasksByTodo } from "./TasksSlice";
 import { setAppStatus } from "./AppSlice";
+import { FieldValues } from "react-hook-form";
 
 export type TodolistState = {
   id: string;
@@ -40,10 +41,13 @@ export const addTodoTC = createAsyncThunk(
     dispatch(setAppStatus("loading"));
     try {
       const response = await todoListsApi.createTodo(title);
-
-      dispatch(addTodo(response.data.data.item));
-      dispatch(addTodosByTasks(response.data.data.item.id));
-      dispatch(setAppStatus("success"));
+      if (!response.data.resultCode) {
+        dispatch(addTodo(response.data.data.item));
+        dispatch(addTodosByTasks(response.data.data.item.id));
+        dispatch(setAppStatus("success"));
+      } else {
+        dispatch(setAppStatus("failed"));
+      }
     } catch (e: any) {
       dispatch(setAppStatus("failed"));
     }
@@ -61,6 +65,8 @@ export const deleteTodoTC = createAsyncThunk(
         dispatch(deleteTodo(todolistId));
         deleteTasksByTodo(todolistId);
         dispatch(setAppStatus("success"));
+      } else {
+        dispatch(setAppStatus("failed"));
       }
     } catch (e: any) {
       dispatch(setAppStatus("failed"));
@@ -79,6 +85,8 @@ export const updateTodoTC = createAsyncThunk(
       if (!response.data.resultCode) {
         dispatch(updateTodo(model));
         dispatch(setAppStatus("success"));
+      } else {
+        dispatch(setAppStatus("failed"));
       }
     } catch (e: any) {
       dispatch(setAppStatus("failed"));

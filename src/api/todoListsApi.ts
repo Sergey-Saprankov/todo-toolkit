@@ -1,6 +1,7 @@
 import { instance } from "./instance";
 import { TodolistState } from "../BLL/reducers/TodolistSlice";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query";
+import { FieldValues } from "react-hook-form";
 
 export const todoListsApi = {
   getTodos: () => {

@@ -5,6 +5,7 @@ type StatusType = "idle" | "loading" | "failed" | "success";
 type initialStateType = {
   isInitialized: boolean;
   status: StatusType;
+  isOpenEditTodoModal: boolean;
 };
 
 export const AppSlice = createSlice({
@@ -12,6 +13,7 @@ export const AppSlice = createSlice({
   initialState: {
     isInitialized: false,
     status: "idle",
+    isOpenEditTodoModal: false,
   } as initialStateType,
   reducers: {
     setAppInitialization: (state, action: PayloadAction<boolean>) => {
@@ -21,8 +23,12 @@ export const AppSlice = createSlice({
     setAppStatus: (state, action: PayloadAction<StatusType>) => {
       state.status = action.payload;
     },
+    isOpenEditTodoModalAC: (state, action: PayloadAction<boolean>) => {
+      state.isOpenEditTodoModal = action.payload;
+    },
   },
 });
 
 export default AppSlice.reducer;
-export const { setAppInitialization, setAppStatus } = AppSlice.actions;
+export const { setAppInitialization, setAppStatus, isOpenEditTodoModalAC } =
+  AppSlice.actions;
