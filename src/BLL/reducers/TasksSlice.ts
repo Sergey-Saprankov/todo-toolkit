@@ -9,15 +9,15 @@ export type TaskType = {
   completed: boolean;
   status: number;
   priority: number;
-  startDate: string;
-  deadline: string;
+  startDate: Date;
+  deadline: Date;
   id: string;
   todoListId: string;
   order: number;
   addedDate: string;
 };
 
-type TasksStateType = {
+export type TasksStateType = {
   [key: string]: TaskType[];
 };
 

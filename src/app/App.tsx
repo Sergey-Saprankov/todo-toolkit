@@ -10,6 +10,18 @@ function App() {
   const dispatch = useAppDispatch();
   const isInitialized = useAppSelector((state) => state.appData.isInitialized);
   const status = useAppSelector((state) => state.appData.status);
+  const {
+    isOpenEditTaskModal,
+    isOpenAddTodoModal,
+    isOpenEditTodoModal,
+    isOpenAddTaskModal,
+  } = useAppSelector((state) => state.appData);
+
+  const isOpenModal =
+    isOpenEditTaskModal ||
+    isOpenAddTodoModal ||
+    isOpenEditTodoModal ||
+    isOpenAddTaskModal;
 
   useEffect(() => {
     dispatch(meTC());
@@ -20,7 +32,7 @@ function App() {
   }
 
   return (
-    <div className={`app dark`}>
+    <div className={isOpenModal ? `app dark openModal` : `app dark`}>
       <Header />
       <Pages />
       {status === "loading" && <Loader />}

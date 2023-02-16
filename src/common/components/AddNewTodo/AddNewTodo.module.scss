@@ -1,0 +1,135 @@
+.wrapper {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 1, 18, 0.53);
+
+  .close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: #2B2C37;
+    border: none;
+    cursor: pointer;
+
+    .closeImg {
+      width: 15px;
+      height: 15px;
+    }
+  }
+
+  .container {
+    width: 480px;
+    //height: 500px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    background: #2B2C37;
+    border-radius: 6px;
+    border: 1px solid #fff;
+
+    .innerWrapper {
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+
+      .title {
+        align-self: center;
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 23px;
+        color: #FFFFFF;
+      }
+
+      .addNameContainer {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+
+        .text {
+          font-weight: 700;
+          font-size: 12px;
+          line-height: 15px;
+          color: #FFFFFF;
+        }
+
+        .changeName {
+          padding: 8px;
+          height: 40px;
+          background: #2B2C37;
+          border: 1px solid #fff;
+          border-radius: 4px;
+
+
+          .changeName:hover {
+            outline: none !important;
+            border: 1px solid #fff;
+          }
+
+          .changeName:active {
+            outline: none !important;
+            border: 1px solid #fff;
+          }
+        }
+      }
+
+      .columnsWrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+
+        .item {
+          padding: 8px;
+          height: 40px;
+          background: #2B2C37;
+          border: 1px solid #fff;
+          border-radius: 4px;
+
+          font-weight: 500;
+          font-size: 13px;
+          line-height: 23px;
+          color: #828080;
+        }
+      }
+
+
+      .btn {
+        padding: 8px 0;
+        background: #635FC7;
+        border: none;
+        border-radius: 20px;
+
+
+        font-weight: 700;
+        font-size: 13px;
+        line-height: 23px;
+        text-align: center;
+        color: #FFFFFF;
+
+        &:disabled {
+          opacity: .5;
+        }
+      }
+    }
+  }
+}
+
+
+.error {
+  position: absolute;
+  bottom: -21px;
+  color: #b31232;
+}
+
+
+
+
+.errorInput {
+  border: 1px solid tomato;
+}

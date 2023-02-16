@@ -5,8 +5,11 @@ import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import { isOpenEditTodoModalAC } from "../../../BLL/reducers/AppSlice";
 import {
   deleteTodoTC,
+  getTodosTC,
   updateTodoTC,
 } from "../../../BLL/reducers/TodolistSlice";
+import { Navigate, useNavigate } from "react-router-dom";
+import { PATH } from "../../constants/path";
 
 type AddNewBoardType = {
   todolistId: string;
@@ -16,13 +19,9 @@ type AddNewBoardType = {
 export const EditTodo: React.FC<AddNewBoardType> = React.memo(
   ({ todolistId, title }) => {
     const dispatch = useAppDispatch();
-    const isOpenEditTodoModal = useAppSelector(
-      (state) => state.appData.isOpenEditTodoModal
-    );
-
     const [newTodoTitle, setNewTodoTitle] = useState(title);
     const [error, setError] = useState("");
-
+    const navigate = useNavigate();
     useEffect(() => {
       if (newTodoTitle !== title) {
         setNewTodoTitle(title);
@@ -48,7 +47,7 @@ export const EditTodo: React.FC<AddNewBoardType> = React.memo(
         setError("Please add To-do List Name");
       }
     };
-    console.log(error);
+
     const updateToDoHandler = () => {
       if (newTodoTitle.trim()) {
         dispatch(updateTodoTC({ todolistId, title: newTodoTitle }));
@@ -60,13 +59,10 @@ export const EditTodo: React.FC<AddNewBoardType> = React.memo(
     const deleteToDoHandler = () => {
       dispatch(deleteTodoTC(todolistId));
       dispatch(isOpenEditTodoModalAC(false));
+      return navigate(PATH.todos);
     };
     return (
-      <div
-        className={
-          isOpenEditTodoModal ? `${s.wrapper} ${s.openModal}` : s.wrapper
-        }
-      >
+      <div className={s.wrapper}>
         <div className={s.container}>
           <button onClick={closeModalHandler} className={s.close}>
             <img className={s.closeImg} src={close} alt="close" />

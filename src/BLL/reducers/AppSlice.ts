@@ -6,6 +6,9 @@ type initialStateType = {
   isInitialized: boolean;
   status: StatusType;
   isOpenEditTodoModal: boolean;
+  isOpenAddTodoModal: boolean;
+  isOpenAddTaskModal: boolean;
+  isOpenEditTaskModal: boolean;
 };
 
 export const AppSlice = createSlice({
@@ -14,6 +17,9 @@ export const AppSlice = createSlice({
     isInitialized: false,
     status: "idle",
     isOpenEditTodoModal: false,
+    isOpenAddTodoModal: false,
+    isOpenAddTaskModal: false,
+    isOpenEditTaskModal: false,
   } as initialStateType,
   reducers: {
     setAppInitialization: (state, action: PayloadAction<boolean>) => {
@@ -26,9 +32,24 @@ export const AppSlice = createSlice({
     isOpenEditTodoModalAC: (state, action: PayloadAction<boolean>) => {
       state.isOpenEditTodoModal = action.payload;
     },
+    isOpenAddTodoModalAC: (state, action: PayloadAction<boolean>) => {
+      state.isOpenAddTodoModal = action.payload;
+    },
+    isOpenAddTaskModalAC: (state, action: PayloadAction<boolean>) => {
+      state.isOpenAddTaskModal = action.payload;
+    },
+    isOpenEditTaskModalAC: (state, action: PayloadAction<boolean>) => {
+      state.isOpenEditTaskModal = action.payload;
+    },
   },
 });
 
 export default AppSlice.reducer;
-export const { setAppInitialization, setAppStatus, isOpenEditTodoModalAC } =
-  AppSlice.actions;
+export const {
+  setAppInitialization,
+  setAppStatus,
+  isOpenEditTodoModalAC,
+  isOpenAddTodoModalAC,
+  isOpenAddTaskModalAC,
+  isOpenEditTaskModalAC,
+} = AppSlice.actions;

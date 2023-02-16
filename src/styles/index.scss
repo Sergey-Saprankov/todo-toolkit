@@ -6,6 +6,7 @@
 
 
 .app {
+ width: 100%;
  position: relative;
  font: var(--font-m);
 
@@ -13,4 +14,11 @@
  color: var(--primary-color);
  height: 1px;
  min-height: 100vh;
+
+ overflow-x: hidden;
+}
+
+.openModal {
+ height: 100vh;
+ overflow: hidden;
 }

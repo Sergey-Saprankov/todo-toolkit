@@ -7,7 +7,6 @@
   top: 0;
   left: 0;
   background-color: rgba(0, 1, 18, 0.53);
-  display: none;
   z-index: 10;
 
   .container {
@@ -130,9 +129,6 @@
   }
 }
 
-.openModal {
-  display: block;
-}
 
 .error {
   position: absolute;

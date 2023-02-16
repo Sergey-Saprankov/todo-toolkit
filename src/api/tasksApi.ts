@@ -44,6 +44,6 @@ export type UpdateModelType = {
   completed: boolean;
   status: number;
   priority: number;
-  startDate: string;
-  deadline: string;
+  startDate: Date;
+  deadline: Date;
 };

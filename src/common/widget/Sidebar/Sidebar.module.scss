@@ -5,9 +5,9 @@
     position: fixed;
     left: 0;
     top: 0;
-    opacity: .7;
-    background-color: #2B2C37;
-    border-right: 1px solid #3E3F4E;
+
+    background-color: rgba(43, 44, 55, 0.85);
+    border-right: 1px solid rgba(255, 255, 255, 0.09);
 
     .innerWrapper {
         padding: 10px 10px 10px 0;
