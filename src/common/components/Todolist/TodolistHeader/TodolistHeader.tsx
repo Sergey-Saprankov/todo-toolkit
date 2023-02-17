@@ -1,7 +1,7 @@
 import React from "react";
 import s from "./TodolistHeader.module.scss";
 import { Button } from "../../Button/Button";
-import pen from "../../../../assets/pencil.svg";
+import setting from "../../../../assets/setting.svg";
 import { useAppDispatch } from "../../../hooks/hooks";
 import {
   isOpenAddTaskModalAC,
@@ -37,8 +37,8 @@ export const TodolistHeader: React.FC<TodolistHeaderType> = React.memo(
             <img
               onClick={openEditModal}
               className={s.iconPen}
-              src={pen}
-              alt="pen"
+              src={setting}
+              alt="setting"
             />
           </div>
           <Button title={"Add Task"} callBack={addTaskHandler} />

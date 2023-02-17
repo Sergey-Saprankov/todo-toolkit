@@ -44,8 +44,8 @@ const TaskColumn: React.FC<TaskColumnType> = React.memo(({ tasks, title}) => {
               <div>{t.description ? t.description : "description"}</div>
             </div>
             <div className={s.blockDate}>
-              <div>Start date {startDate === 'Invalid Date' ? '' : startDate }</div>
-              <div>deadline {deadline === 'Invalid Date'  ? '' : deadline}</div>
+              <div>Start date: {startDate === 'Invalid Date' ? '' : startDate }</div>
+              <div>Deadline: {deadline === 'Invalid Date'  ? '' : deadline}</div>
             </div>
           </div>
         );
