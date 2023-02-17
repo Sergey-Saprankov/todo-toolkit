@@ -3,7 +3,7 @@
   display: flex;
   flex-direction: column;
   gap: 24px;
-  min-width: 360px;
+  width: 20.6vw;
 
   .titleContainer {
     display: flex;
@@ -31,10 +31,9 @@
     flex-direction: column;
     gap: 20px;
     padding: 10px;
-    min-width: 340px;
-    max-width: 360px;
+    word-wrap: break-word;
+    width: 20.6vw;
     min-height: 140px;
-    max-height: 150px;
     background: #2B2C37;
     box-shadow: 0px 4px 6px rgba(54, 78, 126, 0.101545);
     border-radius: 8px;
@@ -49,11 +48,19 @@
       background: #25262f;
     }
 
+    .priority {
+      position: absolute;
+      right: 5%;
+      top: 5%;
+      color: #fff;
+    }
+
     .blockText {
-      height: 80%;
+      flex-grow: 2;
       display: flex;
       flex-direction: column;
       gap: 10px;
+      color: rgb(231, 228, 228);
 
       .blockTaskTitle {
         max-width: 320px;
@@ -67,7 +74,7 @@
     }
 
     .blockDate {
-
+      color: #fff;
       display: flex;
       justify-content: space-between;
     }
@@ -92,4 +99,17 @@
 .draft {
   background: #2B2C37;
   box-shadow: 0 4px 6px rgba(54, 78, 126, 0.101545);
+}
+
+
+.low {
+  border: 1px solid #42a5f5;
+}
+
+.middle {
+  border: 1px solid indigo;
+}
+
+.high {
+  border: 1px solid #ef5350;
 }

@@ -13,17 +13,10 @@ import { dateHandler } from "../../utils/dateHandler";
 import { useParams } from "react-router-dom";
 
 type EditTaskType = {
-  taskId: string;
+  task: TaskType
 };
 
-export const EditTask: React.FC<EditTaskType> = React.memo(({ taskId }) => {
-  const { todolistID } = useParams<{ todolistID: string }>();
-  if (!todolistID) return null;
-  const task = useAppSelector((state) => state.tasksData.tasks)[
-    todolistID
-  ].find((t) => t.id === taskId);
-
-  if (!task) return null;
+export const EditTask: React.FC<EditTaskType> = React.memo(({ task }) => {
   const dispatch = useAppDispatch();
 
   let {
@@ -53,6 +46,7 @@ export const EditTask: React.FC<EditTaskType> = React.memo(({ taskId }) => {
   const [newDescription, setNewDescription] = useState(description);
   const [newStartDate, setNewStartDate] = useState(dateHandler(startDate));
   const [newDeadline, setNewDeadline] = useState(dateHandler(deadline));
+  const [newPriority, setNewPriority] = useState(priority);
   const [newStatus, setNewStatus] = useState(status);
 
   const closeModalHandler = () => {
@@ -61,6 +55,7 @@ export const EditTask: React.FC<EditTaskType> = React.memo(({ taskId }) => {
     setNewStartDate(startDate ? dateHandler(startDate) : "2023-01-13");
     setNewDeadline(deadline ? dateHandler(deadline) : "2023-02-13");
     setNewStatus(0);
+    setNewPriority(1)
     dispatch(isOpenEditTaskModalAC(false));
   };
 
@@ -68,7 +63,7 @@ export const EditTask: React.FC<EditTaskType> = React.memo(({ taskId }) => {
     title: newTitle,
     description: newDescription,
     status: newStatus,
-    priority,
+    priority: newPriority,
     startDate: new Date(newStartDate),
     deadline: new Date(newDeadline),
     completed,
@@ -104,6 +99,10 @@ export const EditTask: React.FC<EditTaskType> = React.memo(({ taskId }) => {
 
   const onChangeStatus = (e: ChangeEvent<HTMLSelectElement>) => {
     setNewStatus(Number(e.currentTarget.value));
+  };
+
+  const onChangePriority = (e: ChangeEvent<HTMLSelectElement>) => {
+    setNewPriority(Number(e.currentTarget.value));
   };
 
   return (
@@ -183,6 +182,21 @@ export const EditTask: React.FC<EditTaskType> = React.memo(({ taskId }) => {
                   <option value={0}>Todo</option>
                   <option value={1}>Doing</option>
                   <option value={2}>Done</option>
+                </select>
+              </label>
+            </div>
+
+            <div className={s.statusContainer}>
+              <label>
+                <span>Priority</span>
+                <select
+                  value={newPriority}
+                  onChange={onChangePriority}
+                  className={s.input}
+                >
+                  <option value={1}>Low</option>
+                  <option value={2}>Middle</option>
+                  <option value={3}>High</option>
                 </select>
               </label>
             </div>

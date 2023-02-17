@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { TaskType } from "./TasksSlice";
 
 type StatusType = "idle" | "loading" | "failed" | "success";
 
@@ -9,6 +10,7 @@ type initialStateType = {
   isOpenAddTodoModal: boolean;
   isOpenAddTaskModal: boolean;
   isOpenEditTaskModal: boolean;
+  currentTask: TaskType
 };
 
 export const AppSlice = createSlice({
@@ -20,6 +22,7 @@ export const AppSlice = createSlice({
     isOpenAddTodoModal: false,
     isOpenAddTaskModal: false,
     isOpenEditTaskModal: false,
+    currentTask: {}
   } as initialStateType,
   reducers: {
     setAppInitialization: (state, action: PayloadAction<boolean>) => {
@@ -41,6 +44,9 @@ export const AppSlice = createSlice({
     isOpenEditTaskModalAC: (state, action: PayloadAction<boolean>) => {
       state.isOpenEditTaskModal = action.payload;
     },
+    getCurrentTask: (state, action:PayloadAction<TaskType>) => {
+      state.currentTask = action.payload
+    }
   },
 });
 
@@ -52,4 +58,5 @@ export const {
   isOpenAddTodoModalAC,
   isOpenAddTaskModalAC,
   isOpenEditTaskModalAC,
+  getCurrentTask
 } = AppSlice.actions;

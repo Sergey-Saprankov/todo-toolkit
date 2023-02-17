@@ -3,7 +3,7 @@ import s from "./TaskColumn.module.scss";
 import { useAppDispatch, useAppSelector } from "../../../hooks/hooks";
 import { TaskType } from "../../../../BLL/reducers/TasksSlice";
 import { EditTask } from "../../EditTask/EditTask";
-import { isOpenEditTaskModalAC } from "../../../../BLL/reducers/AppSlice";
+import { getCurrentTask, isOpenEditTaskModalAC } from "../../../../BLL/reducers/AppSlice";
 import { dateHandler } from "../../../utils/dateHandler";
 
 type TaskColumnType = {
@@ -11,12 +11,7 @@ type TaskColumnType = {
   tasks: TaskType[];
 };
 
-const TaskColumn: React.FC<TaskColumnType> = React.memo(({ tasks, title }) => {
-  const [taskId, setTaskId] = useState("");
-
-  const isOpenEditTaskModal = useAppSelector(
-    (state) => state.appData.isOpenEditTaskModal
-  );
+const TaskColumn: React.FC<TaskColumnType> = React.memo(({ tasks, title}) => {
   const dispatch = useAppDispatch();
 
   return (
@@ -29,23 +24,32 @@ const TaskColumn: React.FC<TaskColumnType> = React.memo(({ tasks, title }) => {
       </div>
       {tasks.map((t) => {
         const changeTaskHandler = () => {
-          setTaskId(t.id);
+        const currentTask = tasks.find(task => task.id === t.id)
+        if (currentTask) {
+          dispatch(getCurrentTask(currentTask))
           dispatch(isOpenEditTaskModalAC(true));
+        }
         };
+
+        const priority = t.priority === 1 ? 'low' : t.priority === 2 ? 'middle' : 'high'
+
+        const startDate = dateHandler(t.startDate);
+        const deadline = dateHandler(t.deadline);
+
         return (
-          <div onClick={changeTaskHandler} className={s.blockTask} key={t.id}>
+          <div onClick={changeTaskHandler} className={`${s.blockTask} ${s[priority]}`} key={t.id}>
+            <div className={s.priority}>{priority}</div>
             <div className={s.blockText}>
               <div className={s.blockTaskTitle}>{t.title}</div>
               <div>{t.description ? t.description : "description"}</div>
             </div>
             <div className={s.blockDate}>
-              <div>{dateHandler(t.startDate)}</div>
-              <div>{dateHandler(t.deadline)}</div>
+              <div>Start date {startDate === 'Invalid Date' ? '' : startDate }</div>
+              <div>deadline {deadline === 'Invalid Date'  ? '' : deadline}</div>
             </div>
           </div>
         );
       })}
-      {isOpenEditTaskModal && taskId && <EditTask taskId={taskId} />}
     </div>
   );
 });
