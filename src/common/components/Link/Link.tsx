@@ -2,6 +2,7 @@ import React from "react";
 import board from "../../../assets/board.svg";
 import { NavLink } from "react-router-dom";
 import s from "./Link.module.scss";
+import { titleHandler } from "../../utils/titleHandler";
 
 type LinkType = {
   todolistId: string;
@@ -19,7 +20,7 @@ export const Link: React.FC<LinkType> = React.memo(({ todolistId, title }) => {
         <div className={s.boardIconContainer}>
           <img className={s.boardIcon} src={board} alt="board-icon" />
         </div>
-        <div className={s.boardTitle}>{title}</div>
+        <div className={s.boardTitle}>{titleHandler(title)}</div>
       </li>
     </NavLink>
   );

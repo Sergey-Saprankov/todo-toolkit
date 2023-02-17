@@ -11,6 +11,7 @@ import {
 import { Navigate } from "react-router-dom";
 import { PATH } from "../../../constants/path";
 import { addTaskTC } from "../../../../BLL/reducers/TasksSlice";
+import { titleHandler } from "../../../utils/titleHandler";
 
 type TodolistHeaderType = {
   title: string;
@@ -28,12 +29,14 @@ export const TodolistHeader: React.FC<TodolistHeaderType> = React.memo(
       dispatch(isOpenAddTaskModalAC(true));
     };
 
+    const todoTitle = titleHandler(title)
+
     return (
       <header className={s.header}>
         <div className={s.innerWrapper}>
           {/*<EditableSpan value={title} id={id} />*/}
           <div className={s.titleContainer}>
-            <h3 className={s.title}>{`${title}`}</h3>
+            <h3 className={s.title}>{todoTitle}</h3>
             <img
               onClick={openEditModal}
               className={s.iconPen}
