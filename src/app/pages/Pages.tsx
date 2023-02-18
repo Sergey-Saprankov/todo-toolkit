@@ -10,15 +10,10 @@ export const Pages = () => {
   return (
     <Routes>
       <Route path={PATH.login} element={<Login />} />
-      <Route element={<RequireAuth />}>
-        <Route element={<Main />}>
-          <Route
-            path={"/todo-toolkit"}
-            element={<Navigate to={PATH.todos} />}
-          />
-          <Route path={PATH.todos} element={<Todolist />} />
-          <Route path={PATH.todolist} element={<Todolist />} />
-        </Route>
+      <Route element={<Main />}>
+        <Route path={"/todo-toolkit"} element={<Navigate to={PATH.todos} />} />
+        <Route path={PATH.todos} element={<Todolist />} />
+        <Route path={PATH.todolist} element={<Todolist />} />
       </Route>
     </Routes>
   );

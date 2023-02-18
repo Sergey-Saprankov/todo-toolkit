@@ -1,4 +1,11 @@
 .container {
+  position: relative;
     width: 100%;
+
     min-height: calc(100vh - 62px);
   }
+
+.openModal {
+  height: 100vh;
+  overflow: hidden;
+}

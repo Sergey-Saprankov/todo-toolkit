@@ -10,20 +10,7 @@ import { EditTask } from "../common/components/EditTask/EditTask";
 function App() {
   const dispatch = useAppDispatch();
   const isInitialized = useAppSelector((state) => state.appData.isInitialized);
-  const currentTask = useAppSelector((state) => state.appData.currentTask);
   const status = useAppSelector((state) => state.appData.status);
-  const {
-    isOpenEditTaskModal,
-    isOpenAddTodoModal,
-    isOpenEditTodoModal,
-    isOpenAddTaskModal,
-  } = useAppSelector((state) => state.appData);
-
-  const isOpenModal =
-    isOpenEditTaskModal ||
-    isOpenAddTodoModal ||
-    isOpenEditTodoModal ||
-    isOpenAddTaskModal;
 
   useEffect(() => {
     dispatch(meTC());
@@ -32,13 +19,11 @@ function App() {
   if (!isInitialized) {
     return <Loader />;
   }
-  console.log(isOpenEditTaskModal);
   return (
-    <div className={isOpenModal ? `app dark openModal` : `app dark`}>
+    <div className={`app dark`}>
       <Header />
       <Pages />
       {status === "loading" && <Loader />}
-      {isOpenEditTaskModal && currentTask && <EditTask task={currentTask} />}
     </div>
   );
 }

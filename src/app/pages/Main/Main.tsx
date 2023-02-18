@@ -8,22 +8,37 @@ import { PATH } from "../../../common/constants/path";
 import { Navigate } from "react-router-dom";
 import { EditTodo } from "../../../common/components/EditToDo/EditTodo";
 import { AddNewTodo } from "../../../common/components/AddNewTodo/AddNewTodo";
+import { EditTask } from "../../../common/components/EditTask/EditTask";
 
 export const Main = () => {
   const dispatch = useAppDispatch();
-  const isOpenAddTodoModal = useAppSelector(
-    (state) => state.appData.isOpenAddTodoModal
-  );
+  const currentTask = useAppSelector((state) => state.appData.currentTask);
+  const {
+    isOpenEditTaskModal,
+    isOpenAddTodoModal,
+    isOpenEditTodoModal,
+    isOpenAddTaskModal,
+  } = useAppSelector((state) => state.appData);
+
+  const isOpenModal =
+    isOpenEditTaskModal ||
+    isOpenAddTodoModal ||
+    isOpenEditTodoModal ||
+    isOpenAddTaskModal;
+
   const isLoggedIn = useAppSelector((state) => state.authData.isLoggedIn);
   if (!isLoggedIn) return <Navigate to={PATH.login} />;
   useEffect(() => {
     dispatch(getTodosTC());
   }, []);
   return (
-    <div className={s.container}>
+    <div
+      className={isOpenModal ? `${s.container} ${s.openModal}` : s.container}
+    >
       <Sidebar />
       <Outlet />
       {isOpenAddTodoModal && <AddNewTodo />}
+      {isOpenEditTaskModal && currentTask && <EditTask task={currentTask} />}
     </div>
   );
 };
