@@ -12,7 +12,7 @@ const schemaParam = {
     ),
   password: Yup.string()
     .required("No password provided")
-    .matches(/(?=.*\d)(?=.*[a-z]).{8,}/, "Incorrect password"),
+    .min(3, "Incorrect password"),
   confirmPwd: Yup.string().oneOf(
     [Yup.ref("password")],
     "Passwords does not match"

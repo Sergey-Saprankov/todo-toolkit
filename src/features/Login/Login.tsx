@@ -51,6 +51,23 @@ export const Login = () => {
           nameForValidate={"rememberMe"}
           register={register}
         />
+        <div className={s.freeContainer}>
+          <p className={s.link}>
+            To log in get registered
+            <a href={"https://social-network.samuraijs.com/"} target={"_blank"}>
+              {" "}
+              <span className={s.accentColor}>here</span>
+            </a>
+          </p>
+          <p className={s.text}>Or use common test account credentials:</p>
+          <p className={s.text}>
+            Email: <span className={s.accentColor}>free@samuraijs.com</span>
+          </p>
+          <p className={s.text}>
+            Password: <span className={s.accentColor}>free</span>
+          </p>
+        </div>
+
         <Button isValid={isValid} title={"Sign In"} type={"submit"}></Button>
       </form>
     </FormWrapper>

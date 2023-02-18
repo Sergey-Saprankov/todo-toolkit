@@ -4,4 +4,22 @@
   gap: 30px;
 
   margin-bottom: 31px;
+
+  .freeContainer {
+    .link {
+      font-weight: 400;
+      margin-bottom: 10px;
+    }
+
+    .text {
+        line-height: 1.3;
+    }
+
+    .accentColor {
+      color: #635FC7;
+      text-decoration: underline;
+    }
+  }
+
+
 }
