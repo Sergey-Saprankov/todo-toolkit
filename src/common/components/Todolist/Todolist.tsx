@@ -14,6 +14,8 @@ import { AddTask } from "../AddTask/AddTask";
 import { EditTask } from "../EditTask/EditTask";
 
 export const Todolist = () => {
+  const isLoggedIn = useAppSelector((state) => state.authData.isLoggedIn);
+  if (!isLoggedIn) return <Navigate to={PATH.login} />;
   const { id } = useParams<{ id: string }>();
   const {
     isOpenEditTaskModal,
@@ -36,10 +38,6 @@ export const Todolist = () => {
     if (!id) return;
     dispatch(getTasksTC(id));
   }, [id]);
-
-  const isLoggedIn = useAppSelector((state) => state.authData.isLoggedIn);
-
-  if (!isLoggedIn) return <Navigate to={PATH.login} />;
 
   const title = currentTodo?.title || "";
 
