@@ -16,6 +16,7 @@ import { EditTask } from "../EditTask/EditTask";
 export const Todolist = () => {
   const isLoggedIn = useAppSelector((state) => state.authData.isLoggedIn);
   if (!isLoggedIn) return <Navigate to={PATH.login} />;
+  const isHide = useAppSelector((state) => state.appData.isHide);
   const { id } = useParams<{ id: string }>();
   const {
     isOpenEditTaskModal,
@@ -44,7 +45,7 @@ export const Todolist = () => {
   if (!id) return null;
   return (
     <div className={s.container}>
-      <div className={isOpenModal ? `${s.wrapper} ${s.isOpen}` : s.wrapper}>
+      <div className={isHide ? `${s.wrapper} ${s.isOpen}` : s.wrapper}>
         <TodolistHeader title={title} id={id} />
         <Tasks todoListId={id} />
       </div>

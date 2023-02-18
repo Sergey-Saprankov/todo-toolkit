@@ -11,6 +11,7 @@ type initialStateType = {
   isOpenAddTodoModal: boolean;
   isOpenAddTaskModal: boolean;
   isOpenEditTaskModal: boolean;
+  isHide: boolean;
   currentTask: TaskType;
 };
 
@@ -24,6 +25,7 @@ export const AppSlice = createSlice({
     isOpenAddTodoModal: false,
     isOpenAddTaskModal: false,
     isOpenEditTaskModal: false,
+    isHide: false,
     currentTask: {},
   } as initialStateType,
   reducers: {
@@ -52,6 +54,9 @@ export const AppSlice = createSlice({
     getCurrentTask: (state, action: PayloadAction<TaskType>) => {
       state.currentTask = action.payload;
     },
+    setHide: (state, action: PayloadAction<boolean>) => {
+      state.isHide = action.payload;
+    },
   },
 });
 
@@ -65,4 +70,5 @@ export const {
   isOpenEditTaskModalAC,
   getCurrentTask,
   setAppError,
+  setHide,
 } = AppSlice.actions;

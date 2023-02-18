@@ -9,6 +9,7 @@ import { Navigate } from "react-router-dom";
 import { EditTodo } from "../../../common/components/EditToDo/EditTodo";
 import { AddNewTodo } from "../../../common/components/AddNewTodo/AddNewTodo";
 import { EditTask } from "../../../common/components/EditTask/EditTask";
+import Visible from "../../../common/components/Visible/Visible";
 
 export const Main = () => {
   const dispatch = useAppDispatch();
@@ -39,6 +40,7 @@ export const Main = () => {
       <Outlet />
       {isOpenAddTodoModal && <AddNewTodo />}
       {isOpenEditTaskModal && currentTask && <EditTask task={currentTask} />}
+      <Visible />
     </div>
   );
 };
