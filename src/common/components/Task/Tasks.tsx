@@ -9,11 +9,8 @@ type TaskType = {
 };
 
 export const Tasks: React.FC<TaskType> = React.memo(({ todoListId }) => {
-  const currentTask = useAppSelector(state => state.appData.currentTask)
   const tasks = useAppSelector((state) => state.tasksData.tasks);
-  const isOpenEditTaskModal = useAppSelector(
-    (state) => state.appData.isOpenEditTaskModal
-  );
+
   const currentTasks = tasks[todoListId];
 
   if (!currentTasks) return null;
@@ -26,10 +23,9 @@ export const Tasks: React.FC<TaskType> = React.memo(({ todoListId }) => {
     <div className={s.container}>
       <div className={s.wrapper}>
         <TaskColumn title={"todo"} tasks={todo} />
-        <TaskColumn title={"doing"} tasks={doing}/>
-        <TaskColumn title={"done"} tasks={done}/>
+        <TaskColumn title={"doing"} tasks={doing} />
+        <TaskColumn title={"done"} tasks={done} />
       </div>
-      {isOpenEditTaskModal && currentTask && <EditTask task={currentTask} />}
     </div>
   );
 });

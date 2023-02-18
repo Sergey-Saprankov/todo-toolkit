@@ -13,11 +13,12 @@ import { dateHandler } from "../../utils/dateHandler";
 import { useParams } from "react-router-dom";
 
 type EditTaskType = {
-  task: TaskType
+  task: TaskType;
 };
 
 export const EditTask: React.FC<EditTaskType> = React.memo(({ task }) => {
   const dispatch = useAppDispatch();
+  console.log("edit");
 
   let {
     priority,
@@ -55,7 +56,7 @@ export const EditTask: React.FC<EditTaskType> = React.memo(({ task }) => {
     setNewStartDate(startDate ? dateHandler(startDate) : "2023-01-13");
     setNewDeadline(deadline ? dateHandler(deadline) : "2023-02-13");
     setNewStatus(0);
-    setNewPriority(1)
+    setNewPriority(1);
     dispatch(isOpenEditTaskModalAC(false));
   };
 
