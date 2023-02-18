@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/todo-toolkit/static/css/main.96b723bd.css",
-    "main.js": "/todo-toolkit/static/js/main.664591a0.js",
+    "main.js": "/todo-toolkit/static/js/main.fff5d2fa.js",
     "static/js/787.9ce7ca80.chunk.js": "/todo-toolkit/static/js/787.9ce7ca80.chunk.js",
     "static/media/logo.svg": "/todo-toolkit/static/media/logo.0b5baa6b49f713ff29297cbfc0a85ff8.svg",
     "static/media/setting.svg": "/todo-toolkit/static/media/setting.b00355b5dd3eb099244fd5852efae9c2.svg",
@@ -10,11 +10,11 @@
     "static/media/eye.svg": "/todo-toolkit/static/media/eye.8a84e96df6fba53737b38c2e5c28eb30.svg",
     "static/media/close.svg": "/todo-toolkit/static/media/close.80d34dcb41463765fc30a6ccd5b2e016.svg",
     "main.96b723bd.css.map": "/todo-toolkit/static/css/main.96b723bd.css.map",
-    "main.664591a0.js.map": "/todo-toolkit/static/js/main.664591a0.js.map",
+    "main.fff5d2fa.js.map": "/todo-toolkit/static/js/main.fff5d2fa.js.map",
     "787.9ce7ca80.chunk.js.map": "/todo-toolkit/static/js/787.9ce7ca80.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.96b723bd.css",
-    "static/js/main.664591a0.js"
+    "static/js/main.fff5d2fa.js"
   ]
 }
