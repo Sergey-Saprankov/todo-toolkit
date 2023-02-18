@@ -1,6 +1,6 @@
 export const PATH = {
   login: "/login",
-  todos: "todo-toolkit",
+  todos: "/todolist",
   main: "/main",
   todolist: "/todolist/:id",
 };
