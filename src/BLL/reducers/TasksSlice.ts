@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { tasksApi, UpdateModelType } from "../../api/tasksApi";
 import { ModelType } from "./TodolistSlice";
 import { setAppStatus } from "./AppSlice";
+import { errorUtils } from "../../common/utils/errorHandler";
 
 export type TaskType = {
   description: string;
@@ -59,6 +60,7 @@ export const getTasksTC = createAsyncThunk(
       dispatch(getTasks(model));
       dispatch(setAppStatus("success"));
     } catch (e: any) {
+      errorUtils(e, dispatch);
       dispatch(setAppStatus("failed"));
     }
   }
@@ -77,6 +79,7 @@ export const addTaskTC = createAsyncThunk(
         dispatch(setAppStatus("failed"));
       }
     } catch (e: any) {
+      errorUtils(e, dispatch);
       dispatch(setAppStatus("failed"));
     }
   }
@@ -95,6 +98,7 @@ export const deleteTaskTC = createAsyncThunk(
         dispatch(setAppStatus("failed"));
       }
     } catch (e: any) {
+      errorUtils(e, dispatch);
       dispatch(setAppStatus("failed"));
     }
   }
@@ -123,6 +127,7 @@ export const updateTaskTC = createAsyncThunk(
         dispatch(setAppStatus("failed"));
       }
     } catch (e: any) {
+      errorUtils(e, dispatch);
       dispatch(setAppStatus("failed"));
     }
   }

@@ -17,3 +17,13 @@
   overflow-x: hidden;
 }
 
+.error {
+  position: absolute;
+  text-align: center;
+  min-width: 100px;
+  bottom: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #b31232;
+  z-index: 10;
+}

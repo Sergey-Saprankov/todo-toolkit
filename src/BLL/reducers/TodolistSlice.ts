@@ -4,6 +4,7 @@ import { logDOM } from "@testing-library/react";
 import { addTodosByTasks, deleteTasksByTodo } from "./TasksSlice";
 import { setAppStatus } from "./AppSlice";
 import { FieldValues } from "react-hook-form";
+import { errorUtils } from "../../common/utils/errorHandler";
 
 export type TodolistState = {
   id: string;
@@ -30,6 +31,7 @@ export const getTodosTC = createAsyncThunk(
       dispatch(getTodos(response.data));
       dispatch(setAppStatus("success"));
     } catch (e: any) {
+      errorUtils(e, dispatch);
       dispatch(setAppStatus("failed"));
     }
   }
@@ -49,6 +51,7 @@ export const addTodoTC = createAsyncThunk(
         dispatch(setAppStatus("failed"));
       }
     } catch (e: any) {
+      errorUtils(e, dispatch);
       dispatch(setAppStatus("failed"));
     }
   }
@@ -69,6 +72,7 @@ export const deleteTodoTC = createAsyncThunk(
         dispatch(setAppStatus("failed"));
       }
     } catch (e: any) {
+      errorUtils(e, dispatch);
       dispatch(setAppStatus("failed"));
     }
   }
@@ -89,6 +93,7 @@ export const updateTodoTC = createAsyncThunk(
         dispatch(setAppStatus("failed"));
       }
     } catch (e: any) {
+      errorUtils(e, dispatch);
       dispatch(setAppStatus("failed"));
     }
   }
