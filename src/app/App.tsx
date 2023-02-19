@@ -6,8 +6,10 @@ import Loader from "../common/components/Loader/Loader";
 import { Header } from "./pages/Header/Header";
 import { Pages } from "./pages/Pages";
 import { Alert } from "antd";
+import { useTheme } from "../styles/theme/useTheme";
 
 function App() {
+  const { theme } = useTheme();
   const dispatch = useAppDispatch();
   const isInitialized = useAppSelector((state) => state.appData.isInitialized);
   const status = useAppSelector((state) => state.appData.status);

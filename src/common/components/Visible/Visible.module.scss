@@ -1,6 +1,6 @@
 .visibleContainer {
-  position: absolute;
-  bottom: 15px;
+  position: fixed;
+  top: calc(95vh - 61px);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -12,7 +12,6 @@
   transform: translateX(-100px);
   z-index: 10;
 }
-
 
 
 .isOpen {

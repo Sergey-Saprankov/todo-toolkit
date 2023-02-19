@@ -1,14 +1,16 @@
 import React from "react";
 import s from "./Header.module.scss";
 import { useAppDispatch, useAppSelector } from "../../../common/hooks/hooks";
-import {Logo} from "../../../common/components/Logo/Logo";
+import { Logo } from "../../../common/components/Logo/Logo";
 import logo from "../../../assets/logo.svg";
 import { Button } from "../../../common/components/Button/Button";
 import { logoutTC } from "../../../BLL/reducers/AuthReducerSlice";
 import { Navigate, useLocation } from "react-router-dom";
 import { PATH } from "../../../common/constants/path";
+import { useTheme } from "../../../styles/theme/useTheme";
 
 export const Header = React.memo(() => {
+  const { theme, toggleTheme } = useTheme();
   const dispatch = useAppDispatch();
   const isLoggedIn = useAppSelector((state) => state.authData.isLoggedIn);
   const location = useLocation();
@@ -16,7 +18,7 @@ export const Header = React.memo(() => {
   const loginHandler = () => {
     return <Navigate to={PATH.login} />;
   };
-  
+
   const logoutHandler = () => {
     dispatch(logoutTC());
   };
@@ -28,7 +30,9 @@ export const Header = React.memo(() => {
           <Logo img={logo} />
 
           {isLoggedIn ? (
-            <Button callBack={logoutHandler} title={"Log out"} />
+            <>
+              <Button callBack={logoutHandler} title={"Log out"} />
+            </>
           ) : (
             <Button
               isValid={!disabled}

@@ -4,7 +4,7 @@ import s from "./Button.module.scss";
 type TypeButton = "button" | "submit" | "reset" | undefined;
 
 type ButtonType = {
-  title: string;
+  title?: string;
   callBack?: () => void;
   isValid?: boolean;
   type?: TypeButton;
