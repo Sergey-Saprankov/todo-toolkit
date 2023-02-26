@@ -1,63 +1,67 @@
-import React, { ChangeEvent, useState, KeyboardEvent } from "react";
-import s from "./AddNewTodo.module.scss";
-import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
-import close from "../../../assets/close.svg";
-import { isOpenAddTodoModalAC } from "../../../BLL/reducers/AppSlice";
-import { addTodoTC } from "../../../BLL/reducers/TodolistSlice";
-import { useNavigate, useParams } from "react-router-dom";
-import { PATH } from "../../constants/path";
+import React, { ChangeEvent, useState, KeyboardEvent, MouseEvent, memo } from 'react'
 
-export const AddNewTodo = React.memo(() => {
-  const dispatch = useAppDispatch();
-  const navigate = useNavigate();
-  const isOpenAddTodoModal = useAppSelector(
-    (state) => state.appData.isOpenAddTodoModal
-  );
-  const [newTodoTitle, setNewTodoTitle] = useState("");
-  const [error, setError] = useState("");
+import { useNavigate, useParams } from 'react-router-dom'
+
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks'
+
+import s from './AddNewTodo.module.scss'
+
+import close from 'assets/close.svg'
+import { isOpenAddTodoModalAC } from 'BLL/reducers/AppSlice'
+import { addTodoTC } from 'BLL/reducers/TodolistSlice'
+
+export const AddNewTodo = memo(() => {
+  const dispatch = useAppDispatch()
+  const [newTodoTitle, setNewTodoTitle] = useState('')
+  const [error, setError] = useState('')
   const closeModalHandler = () => {
-    dispatch(isOpenAddTodoModalAC(false));
-  };
+    dispatch(isOpenAddTodoModalAC(false))
+  }
 
   const onChangeName = (e: ChangeEvent<HTMLInputElement>) => {
-    setNewTodoTitle(e.currentTarget.value);
+    setNewTodoTitle(e.currentTarget.value)
     if (!newTodoTitle) {
-      setError("Please add To-do List Name");
+      setError('Please add To-do List Name')
     }
-  };
+  }
 
   const onBlurHandler = () => {
     if (!newTodoTitle) {
-      setError("Please add To-do List Name");
+      setError('Please add To-do List Name')
     }
-  };
+  }
 
   const addedTodoListOnEnter = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
+    if (e.key === 'Enter') {
       if (newTodoTitle.trim()) {
-        dispatch(addTodoTC(newTodoTitle));
-        setNewTodoTitle("");
-        setError("");
-        dispatch(isOpenAddTodoModalAC(false));
+        dispatch(addTodoTC(newTodoTitle))
+        setNewTodoTitle('')
+        setError('')
+        dispatch(isOpenAddTodoModalAC(false))
       } else {
-        setError("Please add To-do List Name");
+        setError('Please add To-do List Name')
       }
     }
-  };
+  }
 
   const addedNewToDoHandler = () => {
     if (newTodoTitle.trim()) {
-      dispatch(addTodoTC(newTodoTitle));
-      setNewTodoTitle("");
-      setError("");
-      dispatch(isOpenAddTodoModalAC(false));
+      dispatch(addTodoTC(newTodoTitle))
+      setNewTodoTitle('')
+      setError('')
+      dispatch(isOpenAddTodoModalAC(false))
     } else {
-      setError("Please add To-do List Name");
+      setError('Please add To-do List Name')
     }
-  };
+  }
+
+  const clickContent = (e: MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation()
+  }
+
   return (
-    <div className={s.wrapper}>
-      <div className={s.container}>
+    <div onClick={closeModalHandler} className={s.wrapper}>
+      <div onClick={clickContent} className={s.container}>
         <button onClick={closeModalHandler} className={s.close}>
           <img className={s.closeImg} src={close} alt="close" />
         </button>
@@ -72,12 +76,10 @@ export const AddNewTodo = React.memo(() => {
               onChange={onChangeName}
               onBlur={onBlurHandler}
               className={
-                error
-                  ? `${s.changeName} ${s.text} ${s.errorInput}`
-                  : `${s.changeName} ${s.text}`
+                error ? `${s.changeName} ${s.text} ${s.errorInput}` : `${s.changeName} ${s.text}`
               }
               type="text"
-              placeholder={"Please add To-do List Name"}
+              placeholder={'Please add To-do List Name'}
             />
             {!newTodoTitle && <div className={s.error}>{error}</div>}
           </div>
@@ -87,15 +89,11 @@ export const AddNewTodo = React.memo(() => {
           {/*  <div className={s.item}>doing</div>*/}
           {/*  <div className={s.item}>done</div>*/}
           {/*</div>*/}
-          <button
-            disabled={!newTodoTitle}
-            onClick={addedNewToDoHandler}
-            className={s.btn}
-          >
+          <button disabled={!newTodoTitle} onClick={addedNewToDoHandler} className={s.btn}>
             Create New To-do List
           </button>
         </div>
       </div>
     </div>
-  );
-});
+  )
+})

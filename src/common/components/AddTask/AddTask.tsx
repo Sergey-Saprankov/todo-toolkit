@@ -1,66 +1,70 @@
-import React, { ChangeEvent, KeyboardEvent, useState } from "react";
-import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
-import { useNavigate, useParams } from "react-router-dom";
-import {
-  isOpenAddTaskModalAC,
-  isOpenAddTodoModalAC,
-} from "../../../BLL/reducers/AppSlice";
-import { addTodoTC } from "../../../BLL/reducers/TodolistSlice";
-import s from "../AddNewTodo/AddNewTodo.module.scss";
-import close from "../../../assets/close.svg";
-import { addTaskTC } from "../../../BLL/reducers/TasksSlice";
+import React, { ChangeEvent, KeyboardEvent, useState, MouseEvent, memo } from 'react'
 
-export const AddTask = React.memo(() => {
-  const { id } = useParams<{ id: string }>();
+import { useParams } from 'react-router-dom'
 
-  if (!id) return null;
-  const dispatch = useAppDispatch();
+import s from '../AddNewTodo/AddNewTodo.module.scss'
 
-  const [newTaskTitle, setNewTaskTitle] = useState("");
-  const [error, setError] = useState("");
+import close from 'assets/close.svg'
+import { isOpenAddTaskModalAC } from 'BLL/reducers/AppSlice'
+import { addTaskTC } from 'BLL/reducers/TasksSlice'
+import { useAppDispatch } from 'common/hooks/hooks'
+
+export const AddTask = memo(() => {
+  const { id } = useParams<{ id: string }>()
+
+  if (!id) return null
+  const dispatch = useAppDispatch()
+
+  const [newTaskTitle, setNewTaskTitle] = useState('')
+  const [error, setError] = useState('')
   const closeModalHandler = () => {
-    dispatch(isOpenAddTaskModalAC(false));
-  };
+    dispatch(isOpenAddTaskModalAC(false))
+  }
 
   const onChangeName = (e: ChangeEvent<HTMLInputElement>) => {
-    setNewTaskTitle(e.currentTarget.value);
+    setNewTaskTitle(e.currentTarget.value)
     if (!newTaskTitle) {
-      setError("Please add To-do List Name");
+      setError('Please add To-do List Name')
     }
-  };
+  }
 
   const onBlurHandler = () => {
     if (!newTaskTitle) {
-      setError("Please add To-do List Name");
+      setError('Please add To-do List Name')
     }
-  };
+  }
 
   const addedTodoListOnEnter = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
+    if (e.key === 'Enter') {
       if (newTaskTitle.trim()) {
-        dispatch(addTaskTC({ todolistId: id, title: newTaskTitle }));
-        setNewTaskTitle("");
-        setError("");
-        dispatch(isOpenAddTaskModalAC(false));
+        dispatch(addTaskTC({ todolistId: id, title: newTaskTitle }))
+        setNewTaskTitle('')
+        setError('')
+        dispatch(isOpenAddTaskModalAC(false))
       } else {
-        setError("Please add To-do List Name");
+        setError('Please add To-do List Name')
       }
     }
-  };
+  }
 
   const addedNewToDoHandler = () => {
     if (newTaskTitle.trim()) {
-      dispatch(addTaskTC({ todolistId: id, title: newTaskTitle }));
-      setNewTaskTitle("");
-      setError("");
-      dispatch(isOpenAddTaskModalAC(false));
+      dispatch(addTaskTC({ todolistId: id, title: newTaskTitle }))
+      setNewTaskTitle('')
+      setError('')
+      dispatch(isOpenAddTaskModalAC(false))
     } else {
-      setError("Please add Task Name");
+      setError('Please add Task Name')
     }
-  };
+  }
+
+  const clickContent = (e: MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation()
+  }
+
   return (
-    <div className={s.wrapper}>
-      <div className={s.container}>
+    <div onClick={closeModalHandler} className={s.wrapper}>
+      <div onClick={clickContent} className={s.container}>
         <button onClick={closeModalHandler} className={s.close}>
           <img className={s.closeImg} src={close} alt="close" />
         </button>
@@ -75,24 +79,18 @@ export const AddTask = React.memo(() => {
               onChange={onChangeName}
               onBlur={onBlurHandler}
               className={
-                error
-                  ? `${s.changeName} ${s.text} ${s.errorInput}`
-                  : `${s.changeName} ${s.text}`
+                error ? `${s.changeName} ${s.text} ${s.errorInput}` : `${s.changeName} ${s.text}`
               }
               type="text"
-              placeholder={"Please add To-do List Name"}
+              placeholder={'Please add To-do List Name'}
             />
             {!newTaskTitle && <div className={s.error}>{error}</div>}
           </div>
-          <button
-            disabled={!newTaskTitle}
-            onClick={addedNewToDoHandler}
-            className={s.btn}
-          >
+          <button disabled={!newTaskTitle} onClick={addedNewToDoHandler} className={s.btn}>
             Create New Task
           </button>
         </div>
       </div>
     </div>
-  );
-});
+  )
+})

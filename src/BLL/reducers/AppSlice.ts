@@ -1,26 +1,27 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { TaskType } from "./TasksSlice";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-type StatusType = "idle" | "loading" | "failed" | "success";
+import { TaskType } from './TasksSlice'
+
+type StatusType = 'idle' | 'loading' | 'failed' | 'success'
 
 type initialStateType = {
-  isInitialized: boolean;
-  appError: string | null;
-  status: StatusType;
-  isOpenEditTodoModal: boolean;
-  isOpenAddTodoModal: boolean;
-  isOpenAddTaskModal: boolean;
-  isOpenEditTaskModal: boolean;
-  isHide: boolean;
-  currentTask: TaskType;
-};
+  isInitialized: boolean
+  appError: string | null
+  status: StatusType
+  isOpenEditTodoModal: boolean
+  isOpenAddTodoModal: boolean
+  isOpenAddTaskModal: boolean
+  isOpenEditTaskModal: boolean
+  isHide: boolean
+  currentTask: TaskType
+}
 
 export const AppSlice = createSlice({
-  name: "app",
+  name: 'app',
   initialState: {
     isInitialized: false,
     appError: null,
-    status: "idle",
+    status: 'idle',
     isOpenEditTodoModal: false,
     isOpenAddTodoModal: false,
     isOpenAddTaskModal: false,
@@ -30,37 +31,37 @@ export const AppSlice = createSlice({
   } as initialStateType,
   reducers: {
     setAppError: (state, action: PayloadAction<string | null>) => {
-      state.appError = action.payload;
+      state.appError = action.payload
     },
     setAppInitialization: (state, action: PayloadAction<boolean>) => {
-      state.isInitialized = action.payload;
+      state.isInitialized = action.payload
     },
 
     setAppStatus: (state, action: PayloadAction<StatusType>) => {
-      state.status = action.payload;
+      state.status = action.payload
     },
     isOpenEditTodoModalAC: (state, action: PayloadAction<boolean>) => {
-      state.isOpenEditTodoModal = action.payload;
+      state.isOpenEditTodoModal = action.payload
     },
     isOpenAddTodoModalAC: (state, action: PayloadAction<boolean>) => {
-      state.isOpenAddTodoModal = action.payload;
+      state.isOpenAddTodoModal = action.payload
     },
     isOpenAddTaskModalAC: (state, action: PayloadAction<boolean>) => {
-      state.isOpenAddTaskModal = action.payload;
+      state.isOpenAddTaskModal = action.payload
     },
     isOpenEditTaskModalAC: (state, action: PayloadAction<boolean>) => {
-      state.isOpenEditTaskModal = action.payload;
+      state.isOpenEditTaskModal = action.payload
     },
     getCurrentTask: (state, action: PayloadAction<TaskType>) => {
-      state.currentTask = action.payload;
+      state.currentTask = action.payload
     },
     setHide: (state, action: PayloadAction<boolean>) => {
-      state.isHide = action.payload;
+      state.isHide = action.payload
     },
   },
-});
+})
 
-export default AppSlice.reducer;
+export default AppSlice.reducer
 export const {
   setAppInitialization,
   setAppStatus,
@@ -71,4 +72,4 @@ export const {
   getCurrentTask,
   setAppError,
   setHide,
-} = AppSlice.actions;
+} = AppSlice.actions

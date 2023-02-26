@@ -1,18 +1,21 @@
-import React from "react";
-import board from "../../../assets/board.svg";
-import { NavLink } from "react-router-dom";
-import s from "./Link.module.scss";
-import { titleHandler } from "../../utils/titleHandler";
+import React, { memo } from 'react'
+
+import { NavLink } from 'react-router-dom'
+
+import s from './Link.module.scss'
+
+import board from 'assets/board.svg'
+import { titleHandler } from 'common/utils/titleHandler'
 
 type LinkType = {
-  todolistId: string;
-  title: string;
-};
+  todolistId: string
+  title: string
+}
 
-export const Link: React.FC<LinkType> = React.memo(({ todolistId, title }) => {
+export const Link: React.FC<LinkType> = memo(({ todolistId, title }) => {
   return (
     <NavLink
-      className={({ isActive }) => (isActive ? s.active : "")}
+      className={({ isActive }) => (isActive ? s.active : '')}
       key={todolistId}
       to={`/todolist/${todolistId}`}
     >
@@ -23,5 +26,5 @@ export const Link: React.FC<LinkType> = React.memo(({ todolistId, title }) => {
         <div className={s.boardTitle}>{titleHandler(title)}</div>
       </li>
     </NavLink>
-  );
-});
+  )
+})

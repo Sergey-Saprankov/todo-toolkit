@@ -1,24 +1,22 @@
-import React, { ChangeEvent, useEffect, useState } from "react";
-import s from "./EditTask.module.scss";
-import {
-  deleteTaskTC,
-  TaskType,
-  updateTaskTC,
-} from "../../../BLL/reducers/TasksSlice";
-import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
-import close from "../../../assets/close.svg";
-import { isOpenEditTaskModalAC } from "../../../BLL/reducers/AppSlice";
-import { UpdateModelType } from "../../../api/tasksApi";
-import { dateHandler } from "../../utils/dateHandler";
-import { useParams } from "react-router-dom";
+import React, { ChangeEvent, memo, MouseEvent, useState } from 'react'
+
+import s from './EditTask.module.scss'
+
+import { UpdateModelType } from 'api/tasksApi'
+import close from 'assets/close.svg'
+import { isOpenEditTaskModalAC } from 'BLL/reducers/AppSlice'
+import { deleteTaskTC, TaskType, updateTaskTC } from 'BLL/reducers/TasksSlice'
+import { useAppDispatch } from 'common/hooks/hooks'
+import { dateHandler } from 'common/utils/dateHandler'
 
 type EditTaskType = {
-  task: TaskType;
-};
+  task: TaskType
+}
 
-export const EditTask: React.FC<EditTaskType> = React.memo(({ task }) => {
-  const dispatch = useAppDispatch();
-  console.log("edit");
+export const EditTask: React.FC<EditTaskType> = memo(({ task }) => {
+  const dispatch = useAppDispatch()
+
+  console.log('edit')
 
   let {
     priority,
@@ -32,33 +30,25 @@ export const EditTask: React.FC<EditTaskType> = React.memo(({ task }) => {
     description,
     todoListId,
     completed,
-  } = task;
+  } = task
 
-  // useEffect(() => {
-  //   setNewTitle(title);
-  //   setNewDescription(description);
-  //   setNewStartDate(dateHandler(startDate));
-  //   setNewDeadline(dateHandler(deadline));
-  //   setNewStatus(status);
-  // }, [task]);
+  const [newTitle, setNewTitle] = useState(title)
 
-  const [newTitle, setNewTitle] = useState(title);
-
-  const [newDescription, setNewDescription] = useState(description);
-  const [newStartDate, setNewStartDate] = useState(dateHandler(startDate));
-  const [newDeadline, setNewDeadline] = useState(dateHandler(deadline));
-  const [newPriority, setNewPriority] = useState(priority);
-  const [newStatus, setNewStatus] = useState(status);
+  const [newDescription, setNewDescription] = useState(description)
+  const [newStartDate, setNewStartDate] = useState(dateHandler(startDate))
+  const [newDeadline, setNewDeadline] = useState(dateHandler(deadline))
+  const [newPriority, setNewPriority] = useState(priority)
+  const [newStatus, setNewStatus] = useState(status)
 
   const closeModalHandler = () => {
-    setNewTitle(title);
-    setNewDescription(description ? description : "");
-    setNewStartDate(startDate ? dateHandler(startDate) : "2023-01-13");
-    setNewDeadline(deadline ? dateHandler(deadline) : "2023-02-13");
-    setNewStatus(0);
-    setNewPriority(1);
-    dispatch(isOpenEditTaskModalAC(false));
-  };
+    setNewTitle(title)
+    setNewDescription(description ? description : '')
+    setNewStartDate(startDate ? dateHandler(startDate) : '2023-01-13')
+    setNewDeadline(deadline ? dateHandler(deadline) : '2023-02-13')
+    setNewStatus(0)
+    setNewPriority(1)
+    dispatch(isOpenEditTaskModalAC(false))
+  }
 
   const model: UpdateModelType = {
     title: newTitle,
@@ -68,55 +58,52 @@ export const EditTask: React.FC<EditTaskType> = React.memo(({ task }) => {
     startDate: new Date(newStartDate),
     deadline: new Date(newDeadline),
     completed,
-  };
+  }
 
   const onChangeDeadline = (e: ChangeEvent<HTMLInputElement>) => {
-    setNewDeadline(e.currentTarget.value);
-  };
+    setNewDeadline(e.currentTarget.value)
+  }
 
   const onChangeStartDate = (e: ChangeEvent<HTMLInputElement>) => {
-    setNewStartDate(e.currentTarget.value);
-  };
+    setNewStartDate(e.currentTarget.value)
+  }
 
   const deleteTaskHandler = () => {
-    dispatch(isOpenEditTaskModalAC(false));
-    dispatch(deleteTaskTC({ todolistId: todoListId, taskId: id }));
-  };
+    dispatch(isOpenEditTaskModalAC(false))
+    dispatch(deleteTaskTC({ todolistId: todoListId, taskId: id }))
+  }
 
   const saveChangesTask = () => {
-    dispatch(
-      updateTaskTC({ todolistId: todoListId, taskId: id, updateModel: model })
-    );
-    dispatch(isOpenEditTaskModalAC(false));
-  };
+    dispatch(updateTaskTC({ todolistId: todoListId, taskId: id, updateModel: model }))
+    dispatch(isOpenEditTaskModalAC(false))
+  }
 
   const onChangeTitleTask = (e: ChangeEvent<HTMLInputElement>) => {
-    setNewTitle(e.currentTarget.value);
-  };
+    setNewTitle(e.currentTarget.value)
+  }
 
   const onChangeTextArea = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    setNewDescription(e.currentTarget.value);
-  };
+    setNewDescription(e.currentTarget.value)
+  }
 
   const onChangeStatus = (e: ChangeEvent<HTMLSelectElement>) => {
-    setNewStatus(Number(e.currentTarget.value));
-  };
+    setNewStatus(Number(e.currentTarget.value))
+  }
 
   const onChangePriority = (e: ChangeEvent<HTMLSelectElement>) => {
-    setNewPriority(Number(e.currentTarget.value));
-  };
+    setNewPriority(Number(e.currentTarget.value))
+  }
+
+  const clickContent = (e: MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation()
+  }
 
   return (
-    <div className={s.wrapper}>
-      <div className={s.innerWrapper}>
+    <div onClick={closeModalHandler} className={s.wrapper}>
+      <div onClick={clickContent} className={s.innerWrapper}>
         <div className={s.container}>
           <button className={s.close}>
-            <img
-              onClick={closeModalHandler}
-              className={s.closeImg}
-              src={close}
-              alt="close"
-            />
+            <img onClick={closeModalHandler} className={s.closeImg} src={close} alt="close" />
           </button>
           <div className={s.contentWrapper}>
             <h3 className={s.title}>Edit Task</h3>
@@ -129,7 +116,7 @@ export const EditTask: React.FC<EditTaskType> = React.memo(({ task }) => {
                   value={newTitle}
                   className={s.input}
                   type="text"
-                  placeholder={"Add your title"}
+                  placeholder={'Add your title'}
                 />
               </label>
             </div>
@@ -144,8 +131,8 @@ export const EditTask: React.FC<EditTaskType> = React.memo(({ task }) => {
                   placeholder={
                     description
                       ? description
-                      : "e.g. It’s always good to take a break. This 15 minute break will \n" +
-                        "recharge the batteries a little."
+                      : 'e.g. It’s always good to take a break. This 15 minute break will \n' +
+                        'recharge the batteries a little.'
                   }
                 ></textarea>
               </div>
@@ -175,11 +162,7 @@ export const EditTask: React.FC<EditTaskType> = React.memo(({ task }) => {
             <div className={s.statusContainer}>
               <label>
                 <span>Status</span>
-                <select
-                  value={newStatus}
-                  onChange={onChangeStatus}
-                  className={s.input}
-                >
+                <select value={newStatus} onChange={onChangeStatus} className={s.input}>
                   <option value={0}>Todo</option>
                   <option value={1}>Doing</option>
                   <option value={2}>Done</option>
@@ -190,11 +173,7 @@ export const EditTask: React.FC<EditTaskType> = React.memo(({ task }) => {
             <div className={s.statusContainer}>
               <label>
                 <span>Priority</span>
-                <select
-                  value={newPriority}
-                  onChange={onChangePriority}
-                  className={s.input}
-                >
+                <select value={newPriority} onChange={onChangePriority} className={s.input}>
                   <option value={1}>Low</option>
                   <option value={2}>Middle</option>
                   <option value={3}>High</option>
@@ -202,10 +181,7 @@ export const EditTask: React.FC<EditTaskType> = React.memo(({ task }) => {
               </label>
             </div>
 
-            <button
-              onClick={deleteTaskHandler}
-              className={`${s.btn} ${s.delete}`}
-            >
+            <button onClick={deleteTaskHandler} className={`${s.btn} ${s.delete}`}>
               Delete
             </button>
             <button onClick={saveChangesTask} className={s.btn}>
@@ -215,5 +191,5 @@ export const EditTask: React.FC<EditTaskType> = React.memo(({ task }) => {
         </div>
       </div>
     </div>
-  );
-});
+  )
+})

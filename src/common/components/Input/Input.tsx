@@ -26,7 +26,7 @@ export const Input: FC<InputType> = memo(
       <label className={s.labelInput}>
         <div> {label}</div>
         <input
-        // autoComplete='off'
+          // autoComplete='off'
           {...register(nameForValidate)}
           className={error ? `${s.input} ${s.errorInput}` : s.input}
           type={typeInput}

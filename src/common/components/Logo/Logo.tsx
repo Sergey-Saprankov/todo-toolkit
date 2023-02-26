@@ -20,5 +20,3 @@ export const Logo: FC<LogoType> = ({ img }) => {
     </div>
   )
 }
-
-

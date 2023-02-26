@@ -1,16 +1,18 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import "./styles/index.scss";
-import App from "./app/App";
-import reportWebVitals from "./reportWebVitals";
-import { BrowserRouter, HashRouter } from "react-router-dom";
-import { Provider } from "react-redux";
-import { store } from "./store/store";
-import { ThemeProvider } from "./styles/theme/ThemeProvider";
+import React from 'react'
 
-const root = ReactDOM.createRoot(
-  document.getElementById("root") as HTMLElement
-);
+import ReactDOM from 'react-dom/client'
+import './styles/index.scss'
+import { Provider } from 'react-redux'
+import { HashRouter } from 'react-router-dom'
+
+import App from './app/App'
+import reportWebVitals from './reportWebVitals'
+
+import { store } from 'store/store'
+import { ThemeProvider } from 'styles/theme/ThemeProvider'
+
+const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
+
 root.render(
   <HashRouter>
     <Provider store={store}>
@@ -19,9 +21,9 @@ root.render(
       </ThemeProvider>
     </Provider>
   </HashRouter>
-);
+)
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+reportWebVitals()
