@@ -81,12 +81,12 @@ export const AddNewTodo = React.memo(() => {
             />
             {!newTodoTitle && <div className={s.error}>{error}</div>}
           </div>
-          <div className={s.columnsWrapper}>
-            <div className={s.text}>To-do Columns</div>
-            <div className={s.item}>todo</div>
-            <div className={s.item}>doing</div>
-            <div className={s.item}>done</div>
-          </div>
+          {/*<div className={s.columnsWrapper}>*/}
+          {/*  <div className={s.text}>To-do Columns</div>*/}
+          {/*  <div className={s.item}>todo</div>*/}
+          {/*  <div className={s.item}>doing</div>*/}
+          {/*  <div className={s.item}>done</div>*/}
+          {/*</div>*/}
           <button
             disabled={!newTodoTitle}
             onClick={addedNewToDoHandler}

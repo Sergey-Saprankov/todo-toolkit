@@ -86,13 +86,13 @@ export const EditTodo: React.FC<AddNewBoardType> = React.memo(
               />
               {!newTodoTitle && <div className={s.error}>{error}</div>}
             </div>
-            <div className={s.columnsWrapper}>
-              <div className={s.text}>To-do Columns</div>
-              <div className={s.item}>todo</div>
-              <div className={s.item}>doing</div>
-              <div className={s.item}>done</div>
-              <div className={s.item}>draft</div>
-            </div>
+            {/*<div className={s.columnsWrapper}>*/}
+            {/*  <div className={s.text}>To-do Columns</div>*/}
+            {/*  <div className={s.item}>todo</div>*/}
+            {/*  <div className={s.item}>doing</div>*/}
+            {/*  <div className={s.item}>done</div>*/}
+            {/*  <div className={s.item}>draft</div>*/}
+            {/*</div>*/}
             <button
               onClick={deleteToDoHandler}
               className={`${s.btn} ${s.delete}`}
