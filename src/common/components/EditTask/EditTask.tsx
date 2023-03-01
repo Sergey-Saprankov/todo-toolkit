@@ -100,8 +100,8 @@ export const EditTask: React.FC<EditTaskType> = memo(({ task }) => {
 
   return (
     <div onClick={closeModalHandler} className={s.wrapper}>
-      <div onClick={clickContent} className={s.innerWrapper}>
-        <div className={s.container}>
+      <div className={s.innerWrapper}>
+        <div onClick={clickContent} className={s.container}>
           <button className={s.close}>
             <img onClick={closeModalHandler} className={s.closeImg} src={close} alt="close" />
           </button>
