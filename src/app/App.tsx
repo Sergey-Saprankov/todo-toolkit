@@ -2,14 +2,15 @@ import React, { useEffect } from 'react'
 
 import '../styles/index.scss'
 import { Alert } from 'antd'
-
-import { meTC } from '../BLL/reducers/AuthReducerSlice'
-import Loader from '../common/components/Loader/Loader'
-import { useAppDispatch, useAppSelector } from '../common/hooks/hooks'
-import { useTheme } from '../styles/theme/useTheme'
+import { Helmet } from 'react-helmet'
 
 import { Header } from './pages/Header/Header'
 import { Pages } from './pages/Pages'
+
+import { meTC } from 'BLL/reducers/AuthReducerSlice'
+import Loader from 'common/components/Loader/Loader'
+import { useAppDispatch, useAppSelector } from 'common/hooks/hooks'
+import { useTheme } from 'styles/theme/useTheme'
 
 function App() {
   const { theme } = useTheme()
@@ -28,6 +29,11 @@ function App() {
 
   return (
     <div className={`app dark`}>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>To do list</title>
+        <link rel="canonical" href="http://mysite.com/example" />
+      </Helmet>
       <Header />
       <Pages />
       {status === 'loading' && <Loader />}
