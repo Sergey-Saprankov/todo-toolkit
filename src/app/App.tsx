@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 
 import '../styles/index.scss'
 import { Alert } from 'antd'
-import { Helmet } from 'react-helmet'
 
 import { Header } from './pages/Header/Header'
 import { Pages } from './pages/Pages'
@@ -29,11 +28,6 @@ function App() {
 
   return (
     <div className={`app dark`}>
-      <Helmet>
-        <meta charSet="utf-8" />
-        <title>To do list</title>
-        <link rel="canonical" href="http://mysite.com/example" />
-      </Helmet>
       <Header />
       <Pages />
       {status === 'loading' && <Loader />}
